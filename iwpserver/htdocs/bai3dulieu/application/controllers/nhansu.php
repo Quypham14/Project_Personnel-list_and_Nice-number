@@ -117,13 +117,10 @@ public function sua_nhansu($idnhanvao)
 public function xoa_nhansu($id)
 {
 	$this->load->model('nhansu_model');
-	if($this->nhansu_model->removeDataByID($id))
-	{
-		$this->load->view('xoa_thanhcong_view');
-	}
-	else 
-	{
-		echo "Xoa ko thanh cong, xem lai code xoa_nhansu";
+	if ($this->nhansu_model->removeDataByID($id)) {
+		echo json_encode(array('status' => 'success'));
+	} else {
+		echo json_encode(array('status' => 'error'));
 	}
 }
 public function update_nhansu()

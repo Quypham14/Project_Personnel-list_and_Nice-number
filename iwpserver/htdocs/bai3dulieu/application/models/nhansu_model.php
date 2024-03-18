@@ -81,9 +81,9 @@ public function getDataByID($key)
 	}
 	public function removeDataByID($id)
 	{
-		$this->db->where('id',$id);
-		return $this->db->delete('nhan_vien');
-
+		$this->db->where('id', $id);
+		$result = $this->db->delete('nhan_vien');
+		return ($result) ? true : false;
 	}
 }
 
