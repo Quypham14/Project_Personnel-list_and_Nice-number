@@ -82,9 +82,9 @@ public function getDataByID($key)
 	public function removeDataByID($id)
 	{
 		$this->db->where('id', $id);
-		$result = $this->db->delete('nhan_vien');
-		return ($result) ? true : false;
+		return $this->db->delete('nhan_vien');
 	}
+
 }
 
 /* End of file nhansu_model.php */

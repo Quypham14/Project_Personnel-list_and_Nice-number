@@ -114,15 +114,21 @@ public function sua_nhansu($idnhanvao)
 	$ketqua= array('dulieukq'=>$ketqua);
 	$this->load->view('sua_nhansu_view', $ketqua, FALSE);
 }
-public function xoa_nhansu($id)
+public function xoa_nhansu()
 {
 	$this->load->model('nhansu_model');
-	if ($this->nhansu_model->removeDataByID($id)) {
-		echo json_encode(array('status' => 'success'));
-	} else {
-		echo json_encode(array('status' => 'error'));
-	}
+    $id = $this->input->post('id'); // Lấy id từ phương thức POST
+    if ($this->nhansu_model->removeDataByID($id)) {
+        // Trả về mã HTTP 200 (OK) và thông báo "success" trong dữ liệu JSON
+    	$response = array('status' => 'success');
+    	$this->output->set_content_type('application/json')->set_output(json_encode($response));
+    } else {
+        // Trả về mã HTTP 400 (Bad Request) và thông báo "error" trong dữ liệu JSON
+    	$response = array('status' => 'error');
+    	$this->output->set_status_header(400)->set_content_type('application/json')->set_output(json_encode($response));
+    }
 }
+
 public function update_nhansu()
 {
     //lay du lieu tu cai view

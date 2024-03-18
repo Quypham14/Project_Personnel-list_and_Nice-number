@@ -231,6 +231,39 @@
       });
   });
 </script>
+<!-- Đoạn mã JavaScript AJAX nút delete -->
+<script>
+  $(document).ready(function(){
+    // Xử lý sự kiện khi click vào nút xóa
+    $('.fa-trash').click(function(event){
+        event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a
+
+        // Lấy URL cần gửi yêu cầu xóa
+        var deleteUrl = '<?= base_url() ?>/index.php/nhansu/xoa_nhansu';
+
+        // Gửi yêu cầu xóa bằng AJAX
+        $.ajax({
+            type: 'POST', // Sử dụng phương thức POST
+            url: deleteUrl,
+            data: {id: $(this).data('id')}, // Gửi id dưới dạng POST
+            success: function(response){
+              if(response.status === 'success') {
+                    // Nếu xóa thành công, xóa thẻ cha của nút đã click (thẻ div chứa thông tin cá nhân)
+                $(event.target).closest('.profile-card').remove();
+              } else {
+                    // Nếu xóa không thành công, hiển thị thông báo lỗi
+                alert('Xóa không thành công');
+              }
+            },
+            error: function(){
+                // Xử lý lỗi nếu có
+              alert('Đã xảy ra lỗi khi gửi yêu cầu xóa');
+            }
+          });
+      });
+  });
+</script>
+
 </body>
 
 </html>
